@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+  <title>Recipe Library</title>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Recipe Library</h1>
+    </header>
+    <main>
+      <div>
+        <h2>Filter on Cuisine</h2>
+        <button
+          class="filter active"
+          id="all"
+        >All</button>
+        <button
+          class="filter"
+          id="italy"
+        >Italy</button>
+        <button
+          class="filter"
+          id="usa"
+        >USA</button>
+        <button
+          class="filter"
+          id="china"
+        >China</button>
+      </div>
+
+      <div>
+        <h2>Filter on Diet</h2>
+        <button
+          class="diet"
+          id="vegan"
+        >Vegan</button>
+        <button
+          class="diet"
+          id="vegetarian"
+        >Vegetarian</button>
+        <button
+          class="diet"
+          id="glutenFree"
+        >Gluten-Free</button>
+        <button
+          class="diet"
+          id="dairyFree"
+        >Dairy-Free</button>
+      </div>
+
+      <div>
+        <h2>Sort on Time</h2>
+        <button
+          class="sort"
+          id="highToLow"
+        >Descending</button>
+        <button
+          class="sort active"
+          id="lowToHigh"
+        >Ascending</button>
+      </div>
+
+      <!-- Recepten Wrapper -->
+      <div class="recipes">
+        <section class="card">
+          <img src="./pizza.webp">
+          <h2>Temporary placeholder recipe</h2>
+          <hr>
+          <p class="details"><span class="bold">Cuisine: </span>Italy</p>
+          <p class="details"><span class="bold">Time:</span> 1h 30min</p>
+          <hr>
+          <div class="ingredients">
+            <p class="details bold">Ingredients</p>
+            <ul>
+              <li>1 1/2 cups warm water (110 degrees F/45 degrees C)</li>
+              <li>1 tablespoon sugar</li>
+              <li>2 teaspoons kosher salt</li>
+              <li>1 (1/4-ounce) package active dry yeast</li>
+            </ul>
+          </div>
+        </section>
+        <section class="card">
+          <img src="./burger.webp">
+          <h2>Temporary placeholder recipe</h2>
+          <hr>
+          <p class="details"><span class="bold">Cuisine: </span>USA</p>
+          <p class="details"><span class="bold">Time:</span> 1h 30min</p>
+          <hr>
+          <div class="ingredients">
+            <p class="details bold">Ingredients</p>
+            <ul>
+              <li>1 pound ground beef</li>
+              <li>1/2 teaspoon ground black pepper</li>
+              <li>1 teaspoon garlic powder</li>
+              <li>1 teaspoon onion powder</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="card">
+          <img src="./chicken.webp">
+          <h2>Temporary placeholder recipe</h2>
+          <hr>
+          <p class="details"><span class="bold">Cuisine: </span>American</p>
+          <p class="details"><span class="bold">Time:</span> 1h 30min</p>
+          <hr>
+          <div class="ingredients">
+            <p class="details bold">Ingredients</p>
+            <ul>
+              <li>6 bone-in chicken breast halves, or 6 chicken thighs and wings, skin-on</li>
+              <li>1/2 teaspoon coarse salt</li>
+              <li>1/2 teaspoon Mrs. Dash seasoning</li>
+              <li>1/4 teaspoon freshly ground black pepper</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
