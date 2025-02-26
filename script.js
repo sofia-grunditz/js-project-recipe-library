@@ -1,78 +1,38 @@
+//document.addEventListener("DOMContentLoaded", () => {
+//const filters = document.querySelectorAll(".filter");
+//const diets = document.querySelectorAll(".diet");
+//const sorts = document.querySelectorAll(".sort");
+//const messageBox = document.getElementById("messages");
 
+//let selectedFilter = "all";
+//let selectedDiet = null;
+//let selectedSort = null;
 
+//function updateMessage() {
+//let message = `Här har du ${selectedFilter} recipes`;
+//if (selectedDiet) message += `, filtered by ${selectedDiet}`;
+//if (selectedSort) message += `, sorted by ${selectedSort}`;
+//messageBox.innerHTML = `<h2>${message}</h2>`;
+//}
 
+//function handleSelection(buttons, category) {
+//buttons.forEach(button => {
+//button.addEventListener("click", () => {
+//buttons.forEach(btn => btn.classList.remove("active"));
+//button.classList.add("active");
 
+//if (category === "filter") selectedFilter = button.id;
+//if (category === "diet") selectedDiet = button.id;
+//if (category === "sort") selectedSort = button.id;
 
+//updateMessage();
+//});
+//});
+//}
 
+//handleSelection(filters, "filter");
+//handleSelection(diets, "diet");
+//handleSelection(sorts, "sort");
 
-
-
-
-
-const allButton = document.getElementById("all")
-const italyButton = document.getElementById("italy")
-const usaButton = document.getElementById("usa")
-const chinaButton = document.getElementById("china")
-const sortByTimeAscButton = document.getElementById("highToLow")
-const sortByTimeDescButton = document.getElementById("lowToHigh")
-const recipesSection = document.getElementById("recipes")
-const messagesSection = document.getElementById("messages")
-
-// Function to remove active class from all buttons in a group
-const removeActiveClass = (buttons) => {
-  buttons.forEach(button => button.classList.remove("active"))
-}
-
-const recipe = {
-  name: "Baked Chicken",
-  cuisineType: ["American"],
-  ingredients: [
-    "6 bone-in chicken breast halves, or 6 chicken thighs and wings, skin-on",
-    "1/2 teaspoon coarse salt",
-    "1/2 teaspoon Mrs. Dash seasoning",
-    "1/4 teaspoon freshly ground black pepper",
-  ],
-  source: "Martha Stewart",
-  totalTime: 90,
-  url: "http://www.marthastewart.com/318981/baked-chicken",
-  image: "./recipe-images/baked-chicken.jpg",
-}
-
-const updateHTML = (filter, button, buttonGroup) => {
-  removeActiveClass(buttonGroup) // Remove active class from all buttons
-  button.classList.add("active") // Add active class to clicked button
-}
-// allButton.addEventListener("click", () => {
-//   updateHTML("all")
-// })
-
-// italyButton.addEventListener("click", () => {
-//   updateHTML("italian")
-// })
-
-// usaButton.addEventListener("click", () => {
-//   updateHTML("american")
-// })
-
-// chinaButton.addEventListener("click", () => {
-//   updateHTML("chinese")
-// })
-
-// sortByTimeAscButton.addEventListener("click", () => {
-//   updateHTML("ascending")
-// })
-// sortByTimeDescButton.addEventListener("click", () => {
-//   updateHTML("descending")
-// })
-
-// ✅ Event Listeners for Cuisine Filters
-const filterButtons = [allButton, italyButton, usaButton, chinaButton]
-allButton.addEventListener("click", () => updateHTML("all", allButton, filterButtons))
-italyButton.addEventListener("click", () => updateHTML("italian", italyButton, filterButtons))
-usaButton.addEventListener("click", () => updateHTML("american", usaButton, filterButtons))
-chinaButton.addEventListener("click", () => updateHTML("chinese", chinaButton, filterButtons))
-
-// ✅ Event Listeners for Sorting Buttons
-const sortButtons = [sortByTimeAscButton, sortByTimeDescButton]
-sortByTimeAscButton.addEventListener("click", () => updateHTML("ascending", sortByTimeAscButton, sortButtons))
-sortByTimeDescButton.addEventListener("click", () => updateHTML("descending", sortByTimeDescButton, sortButtons))
+//updateMessage();
+//});

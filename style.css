@@ -1,5 +1,5 @@
 body {
-  font-family: Montserrat;
+  font-family: "jost";
   background-color: #FAFBFF;
   margin: 0;
   padding: 10px;
@@ -7,34 +7,28 @@ body {
 
 h1 {
   color: #0018A4;
-  font-size: 64px;
+  font-size: 60px;
   font-style: normal;
   font-weight: 700;
-  line-height: normal;
 }
 
 h2 {
   font-size: 22px;
   font-style: normal;
   font-weight: 700;
-  line-height: normal;
 }
 
-.filters,
-.diets {
+.filters {
   display: flex;
   margin: 20px 0;
-  flex-wrap: wrap;
 }
 
-.filters p,
-.diets p {
+.filters p {
   margin: 0;
   font-weight: bold;
 }
 
-.filters div,
-.diets div {
+.filters div {
   margin-right: 10px;
 }
 
@@ -42,36 +36,31 @@ button {
   padding: 8px 16px;
   border-radius: 50px;
   outline: 0;
-  border: 2px solid transparent;
-  color: #0018A4;
+  border: 2px solid plum;
+  color: purple;
   font-size: 18px;
   font-weight: 500;
   margin: 0 5px 5px 0;
 }
 
 button:hover {
-  border: 2px solid #0018A4;
+  border: 2px solid #0018A4
 }
 
 .sort.active {
   background: #FF6589;
   color: white;
-  border: 2px solid transparent;
+  border: 2px solid #4a43460f;
 }
 
-.filter.active,
-.diet.active {
+.filter.active {
   background: #0018A4;
   color: white;
-  border: 2px solid transparent;
+  border: 2px solid #4a43460f;
 }
 
 .filter {
   background: #CCFFE2;
-}
-
-.diet {
-  background: #FFCECE;
 }
 
 .sort {
@@ -90,7 +79,7 @@ a {
 }
 
 .card {
-  background: #fff;
+  background: #Ffffff;
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -104,7 +93,7 @@ a {
 }
 
 hr {
-  border: 1px solid #E9E9E9;
+  border: 1px solid #FF6589
 }
 
 img {
@@ -136,9 +125,5 @@ img {
 
 p {
   font-size: 16px;
-}
-
-button {
-  cursor: pointer;
-  font-family: Montserrat;
+  font-family: "jost";
 }
