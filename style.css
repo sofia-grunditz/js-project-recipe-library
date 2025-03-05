@@ -36,8 +36,8 @@ button {
   padding: 8px 16px;
   border-radius: 50px;
   outline: 0;
-  border: 2px solid plum;
-  color: purple;
+  border: 2px solid rgba(240, 223, 240, 0.178);
+  color: #0018A4;
   font-size: 18px;
   font-weight: 500;
   margin: 0 5px 5px 0;
