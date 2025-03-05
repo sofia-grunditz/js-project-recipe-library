@@ -52,7 +52,7 @@ const recipes = [
     servings: 4,
     sourceUrl: "https://example.com/vegan-lentil-soup",
     diets: ["vegetarian"],
-    cuisine: "Italy",
+    cuisine: "Italian",
     ingredients: [
       "300 g Arborio rice",
       "1 small onion, finely chopped",
@@ -163,7 +163,7 @@ const recipes = [
     servings: 1,
     sourceUrl: "https://example.com/quick-avocado-toast",
     diets: ["vegan"],
-    cuisine: "USA",
+    cuisine: "American",
     ingredients: [
       "bread",
       "avocado",
@@ -181,7 +181,7 @@ const recipes = [
     servings: 5,
     sourceUrl: "https://example.com/beef-stew",
     diets: ["vegetarian"],
-    cuisine: "USA",
+    cuisine: "American",
     ingredients: [
       "150 g unsalted butter, cold",
       "200 g plain flour (all-purpose flour)",
@@ -206,7 +206,7 @@ const recipes = [
     servings: 6,
     sourceUrl: "https://example.com/tiramisu",
     diets: ["vegetarian"],
-    cuisine: "Italy",
+    cuisine: "Italian",
     ingredients: [
       "250 g mascarpone cheese",
       "3 eggs",
@@ -227,7 +227,7 @@ const recipes = [
     servings: 4,
     sourceUrl: "https://example.com/smores",
     diets: ["vegetarian", "dairy-free"],
-    cuisine: "USA",
+    cuisine: "American",
     ingredients: [
       "8 graham crackers",
       "4 marshmallows",
