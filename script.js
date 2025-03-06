@@ -17,30 +17,18 @@ const dairyFreeButton = document.getElementById("dairy-Free");
 const filterButtons = [allButton, italyButton, usaButton, mexicoButton, japanButton];
 const sortButtons = [sortByTimeAscButton, sortByTimeDescButton];
 const dietButtons = [veganButton, vegetarianButton, glutenFreeButton, dairyFreeButton];
+const randomRecipeButton = document.getElementById("randomRecipe");
+
+
 
 const updateHTML = (filter, button, buttonGroup) => {
   removeActiveClass(buttonGroup); // Ta bort aktiv klass
   button.classList.add("active"); // Lägg till aktiv klass
-
-  let message = "";
-  if (filter === "all") {
-    message = "You eat everything, adventurous!";
-  } else if (filter === "vegan") {
-    message = "You chose Vegan, healthy choice!";
-  } else if (filter === "vegetarian") {
-    message = "You chose Vegetarian, great choice!";
-  } else if (filter === "gluten-free") {
-    message = "You chose Gluten-Free, good choice!";
-  } else if (filter === "dairy-free") {
-    message = "You chose Dairy-Free, nice choice!";
-  } else if (filter === "ascending") {
-    message = "Sorting recipes in ascending order.";
-  } else if (filter === "descending") {
-    message = "Sorting recipes in descending order.";
-  }
-
-  // Clear previous messages and add the new message
-  messagesSection.innerHTML = `<p>${message}</p>`;
+};
+const removeActiveClass = (buttonGroup) => { // vet inte riktigt om den här ska vara här?!
+  buttonGroup.forEach(button => {
+    button.classList.remove("active");
+  });
 };
 
 const recipes = [
@@ -320,6 +308,8 @@ const displayRecipes = (recipes) => {
       <span class="bold">Cuisine:</span> ${recipe.cuisine}</p>
       <p class="details">
         <span class="bold">Ready in:</span> ${recipe.readyInMinutes} minutes</p>
+        <p class="details">
+        <span class="bold">Diet:</span> ${recipe.diets} </p>
       <div class="ingredients">
       <p class="details bold">Ingredients:</p>
       <ul>${ingredientsList}</ul>
@@ -384,6 +374,12 @@ dairyFreeButton.addEventListener("click", () => {
   const dairyFreeRecipes = recipes.filter((recipe) => recipe.diets.includes("dairy-free"));
   displayRecipes(dairyFreeRecipes);
   updateHTML("dairy-free", dairyFreeButton, dietButtons);
+});
+randomRecipeButton.addEventListener("click", () => {
+  const randomIndex = Math.floor(Math.random() * recipes.length);
+  const randomRecipe = [recipes[randomIndex]];
+  displayRecipes(randomRecipe);
+  updateHTML("randomRecipe", randomRecipeButton, []);
 });
 
 displayRecipes(recipes)
