@@ -3,7 +3,6 @@ body {
   font-family: "Jost", sans-serif;
   background-color: #FAFBFF;
   margin: 0;
-  padding: 10px;
 }
 
 h1 {
@@ -155,14 +154,19 @@ p {
   font-size: 16px;
 }
 
+
 .random {
-  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 50px;
+  outline: 0;
+  border: 2px solid rgba(240, 223, 240, 0.178);
   color: #0018A4;
-  background: #fff0f0;
-  border: 2px solid #b18597;
-  border-radius: 0.75em;
-  display: inline-block;
-  text-align: center;
+  background-color: #f3456dea;
+  font-size: 1rem;
+  /* Adjusted font size for mobile */
+  font-weight: 500;
+  margin: 5px;
+  cursor: pointer;
 }
 
 .random:hover {
