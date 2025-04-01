@@ -19,14 +19,11 @@ const sortButtons = [sortByTimeAscButton, sortByTimeDescButton];
 const dietButtons = [veganButton, vegetarianButton, glutenFreeButton, dairyFreeButton];
 const randomRecipeButton = document.getElementById("randomRecipe");
 
-const URL = "https://api.spoonacular.com/recipes/random/?apiKey=a88b42ab50a44e01b8351d8a9d509de7&number=20";
-
 let recipes = []; // Global array to store recipes fetched from the API
 let currentPage = 1; // Håller reda på vilken sida vi är på
 const recipesPerPage = 20; // Hur många recept vi vill hämta per gång
 let scrollEnabled = true; // Håller reda på om scroll är aktiverad
-
-
+const SCROLL_DELAY = 1000; // Delay for enabling scroll after random recipe selection
 
 const updateHTML = (filter, button, buttonGroup) => {
   removeActiveClass(buttonGroup);
@@ -39,37 +36,47 @@ const removeActiveClass = (buttonGroup) => {
   });
 };
 
-const fetchRecipes = () => {
+const fetchRecipes = (retryCount = 3) => {
   const URL = `https://api.spoonacular.com/recipes/random/?apiKey=a88b42ab50a44e01b8351d8a9d509de7&number=${recipesPerPage}&offset=${(currentPage - 1) * recipesPerPage}`;
 
   fetch(URL)
-    .then(response => response.json())  // Omvandla svaret till JSON
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json(); // Omvandla svaret till JSON
+    })
     .then(data => {
-      const newRecipes = data.recipes;  // Uppdatera recepten med API-data
+      const newRecipes = data.recipes; // Uppdatera recepten med API-data
       recipes = [...recipes, ...newRecipes]; // Lägg till nya recept till de redan existerande
       displayRecipes(recipes);
-      console.log("API Response:", newRecipes);
+      messagesSection.style.display = "none"; // Hide error messages if fetch is successful
     })
     .catch(error => {
-      console.error("Error fetching recipes:", error);  // Hantera eventuella fel
+      messagesSection.style.display = "block"; // Show error message
+      messagesSection.innerHTML = "<p>Failed to fetch recipes. Please try again later.</p>";
     });
 };
 
 const displayRecipes = (recipes) => {
   recipesSection.innerHTML = ""; // Clear the existing recipes
 
-  // Filter recipes that have a 'cuisines' property
-  const recipesWithCuisines = recipes.filter((recipe) => recipe.cuisines && recipe.cuisines.length > 0);
+  if (recipes.length === 0) {
+    messagesSection.style.display = "block"; // Show the message section
+    messagesSection.innerHTML = "<p>No recipes found. Please try again later.</p>";
+    return;
+  }
 
-  recipesWithCuisines.forEach((recipe) => {
-    // create ingredient list with the following format: "amount unit name"
+  messagesSection.style.display = "none"; // Hide the message section if recipes are available
+
+  let htmlContent = ""; // Accumulate HTML content in a variable
+
+  recipes.forEach((recipe) => {
     const ingredientsList = recipe.extendedIngredients.map((ingredient) => {
-      return `<li>${ingredient.amount} ${ingredient.unit} ${ingredient.name} </li>`;
+      return `<li>${ingredient.amount} ${ingredient.unit} ${ingredient.name}</li>`;
     }).join("");
 
-    const instructions = recipe.instructions ? recipe.instructions : "No instructions available.";
-
-    recipesSection.innerHTML += `
+    htmlContent += `
       <a href="${recipe.sourceUrl}" target="_blank">
         <section class="card">
           <img src="${recipe.image}" alt="${recipe.title}">
@@ -82,14 +89,12 @@ const displayRecipes = (recipes) => {
             <p class="details bold">Ingredients:</p>
             <ul>${ingredientsList}</ul>
           </div>
-          <div class="instructions">
-          <p class="details bold">Instructions:</p>
-          <p>${instructions}</p>
-          </div>
         </section>
       </a>
     `;
   });
+
+  recipesSection.innerHTML = htmlContent; // Assign the accumulated HTML to innerHTML once
 };
 
 // Event listeners for filter buttons
@@ -141,17 +146,14 @@ veganButton.addEventListener("click", () => {
   updateHTML("vegan", veganButton, dietButtons);
 });
 
-
 vegetarianButton.addEventListener("click", () => {
-  const vegetarianRecipes = recipes.filter((recipe) =>
-    recipe.vegetarian);
+  const vegetarianRecipes = recipes.filter((recipe) => recipe.vegetarian);
   displayRecipes(vegetarianRecipes);
   updateHTML("vegetarian", vegetarianButton, dietButtons);
 });
 
 glutenFreeButton.addEventListener("click", () => {
-  const glutenFreeRecipes = recipes.filter((recipe) =>
-    recipe.glutenFree);
+  const glutenFreeRecipes = recipes.filter((recipe) => recipe.glutenFree);
   displayRecipes(glutenFreeRecipes);
   updateHTML("gluten-free", glutenFreeButton, dietButtons);
 });
@@ -162,35 +164,45 @@ dairyFreeButton.addEventListener("click", () => {
   updateHTML("dairy-free", dairyFreeButton, dietButtons);
 });
 
-// Show a random recipe
 randomRecipeButton.addEventListener("click", () => {
   if (scrollEnabled) {
-    // temporarily disables the scroll function when the random recipe button is clicked (to not interfere with the random recipe display)
     scrollEnabled = false;
 
-    const randomIndex = Math.floor(Math.random() * recipes.length);
-    const randomRecipe = [recipes[randomIndex]];
-    displayRecipes(randomRecipe);
-    updateHTML("randomRecipe", randomRecipeButton, []);
+    if (recipes.length > 0) {
+      const randomIndex = Math.floor(Math.random() * recipes.length);
+      const randomRecipe = [recipes[randomIndex]];
+      displayRecipes(randomRecipe);
+      updateHTML("randomRecipe", randomRecipeButton, []);
 
-    // activating the scroll function again
+      // Hide messages section when there are recipes
+      messagesSection.style.display = "none";
+    } else {
+      displayRecipes([]);
+      // Show the message section when no recipes are available
+      messagesSection.style.display = "block";
+      messagesSection.innerHTML = "<p>No recipes available. Please try again later.</p>";
+    }
+
     setTimeout(() => {
       scrollEnabled = true;
-    }, 1000); // Vänta en sekund (justera beroende på behov)
+    }, SCROLL_DELAY);
   }
 });
-
 
 // Event listener for scroll
 window.addEventListener('scroll', () => {
   // checking if the user is near the end of the page
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+  if (scrollEnabled && window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
     // loading more recipes
-    currentPage++; // 
-    fetchRecipes();
+    if (recipes.length >= currentPage * recipesPerPage) {
+      currentPage++;
+      fetchRecipes();
+    }
+    setTimeout(() => {
+      scrollEnabled = true; // Re-enable scroll after a delay
+    }, SCROLL_DELAY);
   }
 });
 
 // Initial fetch of recipes when the page loads
 fetchRecipes();
-
